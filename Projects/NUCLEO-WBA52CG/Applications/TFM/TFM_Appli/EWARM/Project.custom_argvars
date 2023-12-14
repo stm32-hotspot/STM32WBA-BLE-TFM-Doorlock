@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iarUserArgVars>
+    <group name="TFM_RADIO" active="true">
+        <variable>
+            <name>FIRMWARE_BASE_DIR</name>
+            <value>YOUR_BASE_DIRECTORY</value>
+        </variable>
+    </group>
+</iarUserArgVars>

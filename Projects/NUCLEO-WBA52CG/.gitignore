@@ -1,0 +1,23 @@
+# File extension to not track
+*.lst
+*.o
+*.pbi
+*.out
+*.pbd
+*.pbw
+*.dep
+*.xcl
+*.ninja*
+*.hex
+*.map
+*.browse
+*.ewt
+
+# Repo to not track
+Applications/**/**/.vscode/
+Applications/**/**/BrowseInfo/
+Applications/**/**/EWARM/settings/
+Applications/**/**/EWARM/**/BrowseInfo/
+Applications/**/**/EWARM/**/Exe/
+Applications/**/**/EWARM/**/List/
+Applications/**/**/EWARM/**/Obj/

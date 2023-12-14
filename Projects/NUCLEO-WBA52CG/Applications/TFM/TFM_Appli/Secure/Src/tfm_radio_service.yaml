@@ -1,0 +1,53 @@
+#-------------------------------------------------------------------------------
+# Copyright (c) 2018-2020, Arm Limited. All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+
+{
+  "psa_framework_version": 1.0,
+  "name": "TFM_RADIO_SERVICE",
+  "type": "APPLICATION-ROT",
+  "priority": "NORMAL",
+  "id": "0x00000102",
+  "entry_point": "radio_service_init",
+  "stack_size": "0x0200",
+  "services": [
+    {
+      "name": "TFM_RADIO_SERVICE",
+      "sid": "0x0000F000",
+      "non_secure_clients": true,
+      "version": 1,
+      "version_policy": "STRICT"
+    }
+  ],
+  #"services": [
+  #  {
+  #    "name": "TFM_APP_ROT_IOCTL",
+  #    "signal": "TFM_APP_ROT_IOCTL_SIG",
+  #    "sid": "0x00000100",
+  #    "non_secure_clients": true,
+  #    "minor_version": 1,
+  #    "minor_policy": "STRICT"
+  #   },
+  #],
+  "linker_pattern": {
+    "library_list": [
+      "*tfm_radio_service*"
+    ]
+  },
+  #"secure_functions": [
+  #  {
+  #    "name": "TFM_APP_ROT_IOCTL",
+  #    "signal": "TFM_APP_ROT_IOCTL_SIG",
+  #    "sid": "0x00000100",
+  #    "non_secure_clients": true,
+  #    "version": 1,
+  #    "version_policy": "STRICT"
+  #  },
+  #],
+  # "dependencies": [
+  #  "TFM_SP_PLATFORM_IOCTL"
+  #]
+}

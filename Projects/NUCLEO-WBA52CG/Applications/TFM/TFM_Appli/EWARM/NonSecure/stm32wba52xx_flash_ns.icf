@@ -1,0 +1,33 @@
+#include "region_defs.h"
+
+/* NVM Memory region: 2 sectors at the end of the NS FLASH */
+define symbol __ICFEDIT_region_NVM_size__ = 0x4000;
+define symbol __ICFEDIT_region_NVM_end__ = NS_CODE_LIMIT;
+define symbol __ICFEDIT_region_NVM_start__ = __ICFEDIT_region_NVM_end__ - __ICFEDIT_region_NVM_size__ + 0x1;
+
+define memory mem with size = 4G;
+
+define region NVM_region     =   mem:[from __ICFEDIT_region_NVM_start__   to __ICFEDIT_region_NVM_end__];
+define region NS_CODE_region =   mem:[from NS_CODE_START to __ICFEDIT_region_NVM_start__];
+
+define region NS_RAM_Region_noinit = mem:[from NS_DATA_START size NS_NO_INIT_DATA_SIZE];
+define region NS_RAM_region  =  mem:[from (NS_DATA_START+NS_NO_INIT_DATA_SIZE) size (NS_DATA_SIZE-NS_NO_INIT_DATA_SIZE)];
+
+define block ARM_LIB_STACK_MSP	with alignment = 8, size = NS_MSP_STACK_SIZE { };
+define block ARM_LIB_STACK	with alignment = 8, size = NS_PSP_STACK_SIZE { };
+define block HEAP       	with alignment = 8, size = NS_HEAP_SIZE { };
+define block ER_DATA_NOINIT { section .noinit};
+define block ER_CODE		with alignment = 8 {readonly};
+define block ER_CODE_END with alignment = 32, size = 0 { };
+
+place at address mem:NS_CODE_START { readonly section .intvec };
+define block ER_DATA with maximum size = 0x20000, alignment = 8 {readwrite};
+
+do not initialize  { section .noinit };
+initialize by copy with packing = none{ readwrite };
+
+
+place in NS_CODE_region  { block ER_CODE , last block ER_CODE_END,};
+place in NVM_region         { };
+place in NS_RAM_Region_noinit  { block  ER_DATA_NOINIT };
+place in NS_RAM_region   { block ER_DATA, block ARM_LIB_STACK_MSP, block ARM_LIB_STACK, block HEAP };

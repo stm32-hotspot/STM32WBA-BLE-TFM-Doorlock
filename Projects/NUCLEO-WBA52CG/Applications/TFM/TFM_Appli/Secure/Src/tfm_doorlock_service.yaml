@@ -1,0 +1,51 @@
+#-------------------------------------------------------------------------------
+# Copyright (c) 2018-2020, Arm Limited. All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+#
+#-------------------------------------------------------------------------------
+
+{
+  "psa_framework_version": 1.0,
+  "name": "TFM_DOORLOCK_SERVICE",
+  "type": "PSA-ROT",
+  "priority": "NORMAL",
+  "id": "0x00000102",
+  "entry_point": "doorlock_service_init",
+  "stack_size": "0x0800",
+  "irqs": [
+    {
+      "source": "LPTIM1_IRQ",
+      "signal": "TFM_DOORLOCK_TIMER_IRQ",
+      "tfm_irq_priority": 64,
+    }
+  ],
+  "services": [
+    {
+      "name": "TFM_DOORLOCK_REQUEST_OPEN",
+      "sid": "0x0000E000",
+      "non_secure_clients": true,
+      "version": 1,
+      "version_policy": "STRICT"
+    },
+    {
+      "name": "TFM_DOORLOCK_ANSWER_CHALLENGE",
+      "sid": "0x0000E001",
+      "non_secure_clients": true,
+      "version": 1,
+      "version_policy": "STRICT"
+    },
+    {
+      "name": "TFM_DOORLOCK_SET_CALLBACK",
+      "sid": "0x0000E002",
+      "non_secure_clients": true,
+      "version": 1,
+      "version_policy": "STRICT"
+    }
+  ],
+  "linker_pattern": {
+    "library_list": [
+      "*tfm_doorlock_service*"
+    ]
+  },
+}
